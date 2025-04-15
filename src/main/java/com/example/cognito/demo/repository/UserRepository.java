@@ -5,8 +5,7 @@ import com.example.cognito.demo.entity.User;
 
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<User, Integer> {
-    Optional<User> findByEmail(String email);
+public interface UserRepository extends JpaRepository<User, Long> {
 
-    Optional<User> findByCognitoUserId(String cognitoUserId);
+    Optional<User> findByUsername(String cognitoUserName);
 }

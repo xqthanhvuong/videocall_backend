@@ -20,14 +20,8 @@ public class UserService {
     public User registerUser(User user) {
         return userRepository.save(user);
     }
-
-    // Tìm người dùng theo email
-    public User getUserByEmail(String email) {
-        return userRepository.findByEmail(email).orElseThrow(() -> new BadException(ErrorCode.USER_NOT_EXISTED));
-    }
-
-    public User getUserByCognitoUserId(String cognitoUserId) {
-        return userRepository.findByCognitoUserId(cognitoUserId).orElse(null);
+    public User getUserByUserName(String cognitoUsername) {
+        return userRepository.findByUsername(cognitoUsername).orElse(null);
     }
 
 

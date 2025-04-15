@@ -1,30 +1,23 @@
 package com.example.cognito.demo.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
-import lombok.experimental.FieldDefaults;
-import org.hibernate.annotations.CreationTimestamp;
-import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@Table(name = "rooms")
 public class Room {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
-    String roomName;
+    private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "created_by")
-    User createdBy;
+    private String roomName;
 
-    @CreationTimestamp
-    LocalDateTime createdAt;
+    @OneToMany(mappedBy = "room")
+    private List<User> users;
+
 }

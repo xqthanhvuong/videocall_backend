@@ -4,7 +4,6 @@ import com.example.cognito.demo.dto.response.JsonResponse;
 import com.example.cognito.demo.entity.User;
 import com.example.cognito.demo.service.UserService;
 import com.example.cognito.demo.utils.JwtTokenProvider;
-import io.swagger.v3.core.util.Json;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -22,16 +21,14 @@ public class UserController {
     // Đăng ký người dùng từ JWT token
     @PostMapping("/register")
     public JsonResponse<?> registerUser() {
-        String cognitoUserId = jwtTokenProvider.getUserId();
+        String cognitoUserName = jwtTokenProvider.getUserName();
 
 
-        User existingUser = userService.getUserByCognitoUserId(cognitoUserId);
+        User existingUser = userService.getUserByUserName(cognitoUserName);
 
         if (existingUser == null) {
             User newUser = new User();
-            newUser.setCognitoUserId(cognitoUserId);
-            newUser.setUsername("username_from_token");  // Bạn có thể lấy thông tin từ token
-            newUser.setEmail("email_from_token");  // Tương tự, lấy email từ token
+            newUser.setUsername(cognitoUserName);
             return JsonResponse.success(userService.registerUser(newUser));
         }
 

@@ -16,7 +16,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) // Tắt CSRF cho API REST
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("api/public/**").permitAll() // Cho phép endpoint công khai
+                        .requestMatchers("/video-call").permitAll() // Cho phép endpoint công khai
                         .anyRequest().authenticated() // Các request khác cần xác thực
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
